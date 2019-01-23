@@ -72,7 +72,7 @@ $ ruby your_ruby_program.rb
     # this is how we return a value from a function in ruby
     return "If you're happy and you know it, clap your hands!"
     # note: 'return' keyword here is optional too!
-    # but is used to exit a function midway
+    # but is useful for exiting a function midway
     # so this would work same as the above return statement:
     "If you're happy and you know it, clap your hands!"
 end # this is how you end a ruby function or in general a code block
