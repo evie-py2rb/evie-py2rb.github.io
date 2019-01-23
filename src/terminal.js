@@ -16,7 +16,7 @@ export class TerminalComponent extends React.Component {
         var options = {
             strings: [
                         "<i>Welcome</i> to Evie <strong>py2rb</strong> tutorial.^600",
-                        "If you're not a python nerd - ",
+                        "If you're not a python nerd",
                         "Abort immediately!!!",
                         "I repeat...ABORT immediately!!!"
 
