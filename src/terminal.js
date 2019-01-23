@@ -37,7 +37,7 @@ export class TerminalComponent extends React.Component {
     }
 
     startTutorial = () => {
-        this.props.history.push('/abc');
+        this.props.history.push('/tutorial');
     }
 
     abort = () => {

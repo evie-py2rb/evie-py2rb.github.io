@@ -8,16 +8,12 @@ import { TerminalComponent } from './terminal';
 
 class Home extends React.Component {
 
-    testRender() {
-        console.log('abc');
-    }
-
     render() {
         return (
             <Router>
                 <div className="main">
                     <Route exact path="/" component={TerminalComponent}/>
-                    <Route path="/abc" component={TutorialComponent}/>
+                    <Route path="/tutorial" component={TutorialComponent}/>
                 </div>
             </Router>
         );
