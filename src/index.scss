@@ -14,6 +14,7 @@
  }
 
 .main {
+    font-family: 'font', san-serif;
     padding: 20px 0;
     height: 100vh;
     display: flex;
@@ -60,7 +61,6 @@
         align-items: center;
         background-image: url("../img/term.png");
         font-size: 35px;
-        font-family: 'font', san-serif;
         min-width: 650px;
         max-width: 650px;
         min-height: 400px;
@@ -93,5 +93,9 @@
     }
     .center {
         text-align: center;
+    }
+
+    .bold {
+        font-family: 'font2', san-serif;
     }
 }

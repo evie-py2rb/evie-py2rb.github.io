@@ -23,7 +23,7 @@ export class CodeRendererComponent extends React.Component {
         return (
             <div className='code-renderer'>
                 <pre>
-                    <code className={`hljs`} ref={(node) => this.codeRef = node}>
+                    <code className={`hljs ${this.props.type}`} ref={(node) => this.codeRef = node}>
                     </code>
                 </pre>
             </div>
