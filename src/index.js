@@ -1,17 +1,25 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.scss';
+import { TutorialComponent } from './tutorial';
+import { TerminalComponent } from './terminal';
 
 class Home extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+
+    testRender() {
+        console.log('abc');
     }
 
     render() {
-        
         return (
-          <div>
-            Testing react setup
-          </div>
+            <Router>
+                <div className="main">
+                    <Route exact path="/" component={TerminalComponent}/>
+                    <Route path="/abc" component={TutorialComponent}/>
+                </div>
+            </Router>
         );
     }
 }
