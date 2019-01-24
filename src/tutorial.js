@@ -13,7 +13,7 @@ export class TutorialComponent extends React.Component {
         } else {
             currentPage -= 1;
         }
-        this.stepNames = ["Interactive Console", "Function definition", "Comments", 'Arrays'];
+        this.stepNames = ["Interactive Console", "Function definition", "Comments", 'Arrays', 'More on arrays'];
         this.pythonCodes = [
 `# Opening an interactive python console
 $ python
@@ -61,22 +61,16 @@ Type "help", "copyright", "credits" or "license" for more information.
 # oops forgot TK!!
 >>> evie_cool_peeps.append("TK")
 ['Alyssa', 'Ashish', 'Evie', 'Jin', 'Jo', 'Madhav', 'Sheng', 'Wu Wei', 'Yee Yee', 'TK']
-# in python - arrays/ lists can be heterogeneous, right?
+`,
+`# in python - arrays/ lists can be heterogeneous, right?
 >>> another_array = [1, 2, 'Evie', 6.0, True]
 >>> len(another_array) # checking length of array
 5
-'''
-in python if you'll access non-existent indices,
-it'll throw you a nice - 'index out of range' error
-'''
+# in python if you'll access non-existent indices, it'll throw you a nice - 'index out of range' error
 >>> another_array[5]
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
 IndexError: list index out of range
 # same for writing to a non-existent index
 >>> another_array[5] = 0
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
 IndexError: list assignment index out of range
 `
 ];
@@ -133,7 +127,8 @@ irb(main):004:0> evie_cool_peeps # notice - the original array is still unmodifi
 # oops forgot TK!!
 irb(main):005:0> evie_cool_peeps.push("TK") # this is how you append in ruby array
 => ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish", "TK"]
-# just like python, ruby arrays can be heterogeneous too!
+`,
+`# just like python, ruby arrays can be heterogeneous too!
 irb(main):006:0> another_array = [1, 2, 'Evie', 6.0, True]
 => [1, 2, "Evie", 6.0, true]
 irb(main):007:0> another_array.size # checking length of array
@@ -141,7 +136,7 @@ irb(main):007:0> another_array.size # checking length of array
 # but ruby returns 'nil' for non-existent indices
 irb(main):008:0> another_array[5]
 => nil
-# if you write, to a non-existent index it'll insert nil upto that index
+# if you write to a non-existent index it'll insert 'nil' upto that index
 irb(main):009:0> another_array[7] = 0
 => 0
 irb(main):010:0> another_array
@@ -231,7 +226,7 @@ irb(main):010:0> another_array
                         <div className="center">
                         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                             <DropdownToggle caret>
-                                {`${this.state.currentPage+1}. ${this.stepNames[this.state.currentPage]}`}
+                                {`${this.state.currentPage+1}. ${this.stepNames[this.state.currentPage]} `}
                             </DropdownToggle>
                             <DropdownMenu>
                                 {this.stepNames.map((stepName, i) => {
