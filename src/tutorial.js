@@ -65,6 +65,19 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> another_array = [1, 2, 'Evie', 6.0, True]
 >>> len(another_array) # checking length of array
 5
+'''
+in python if you'll access non-existent indices,
+it'll throw you a nice - 'index out of range' error
+'''
+>>> another_array[5]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list index out of range
+# same for writing to a non-existent index
+>>> another_array[5] = 0
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list assignment index out of range
 `
 ];
 
@@ -110,21 +123,29 @@ ruby will consider everything in between as a comment
 =end
 `,
 `$ irb
-irb(main):001:0* evie_cool_peeps = ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish"]
+irb(main):001:0> evie_cool_peeps = ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish"]
 => ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish"]
 irb(main):02:0>
-irb(main):03:0* evie_cool_peeps.sort() # unlike python this won't modify the same array
+irb(main):03:0> evie_cool_peeps.sort() # unlike python this won't modify the same array
 => ["Alyssa", "Ashish", "Evie", "Jin", "Jo", "Madhav", "Sheng", "Wu Wei", "Yee Yee"]
 irb(main):004:0> evie_cool_peeps # notice - the original array is still unmodified!
 => ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish"]
 # oops forgot TK!!
-irb(main):005:0* evie_cool_peeps.push("TK") # this is how you append in ruby array
+irb(main):005:0> evie_cool_peeps.push("TK") # this is how you append in ruby array
 => ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish", "TK"]
 # just like python, ruby arrays can be heterogeneous too!
-irb(main):006:0* another_array = [1, 2, 'Evie', 6.0, True]
+irb(main):006:0> another_array = [1, 2, 'Evie', 6.0, True]
 => [1, 2, "Evie", 6.0, true]
-irb(main):006:0* another_array.size # checking length of array
+irb(main):007:0> another_array.size # checking length of array
 => 5
+# but ruby returns 'nil' for non-existent indices
+irb(main):008:0> another_array[5]
+=> nil
+# if you write, to a non-existent index it'll insert nil upto that index
+irb(main):009:0> another_array[7] = 0
+=> 0
+irb(main):010:0> another_array
+=> [1, 2, "Evie", 6.0, true, nil, nil, 0]
 `
 ];
         this.equalizeCodes();
