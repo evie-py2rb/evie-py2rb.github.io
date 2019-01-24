@@ -1,17 +1,16 @@
 @font-face {
     font-family: 'font' ;
     src: url('../fonts/terminus.ttf') format('truetype');
- }
+}
  
- @font-face {
+@font-face {
     font-family: 'font2' ;
     src: url('../fonts/terminusb.ttf') format('truetype');
- }
- 
- @font-face {
-    font-family: 'font3' ;
-    src: url('../fonts/terminusi.ttf') format('truetype');
- }
+}
+
+body {
+    background-image: url("../img/bg.jpg");
+}
 
 .main {
     font-family: 'font', san-serif;
@@ -71,7 +70,7 @@
         background-repeat: no-repeat;
         background-size: 100%;
         border-radius: 10px;
-        box-shadow: 8px 8px 12px #888888;
+        box-shadow: 8px 8px 12px #383838;
         color: #00de00;
     }
     .action-button {
@@ -83,7 +82,7 @@
         }
     }
     .code-renderer {
-        box-shadow: 8px 8px 12px #757575;
+        box-shadow: 8px 8px 12px #383838;
         .hljs {
             padding: 20px;
             &.min-100 {
