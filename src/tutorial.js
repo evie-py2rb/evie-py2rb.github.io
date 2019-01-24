@@ -215,6 +215,7 @@ irb(main):006:0* another_array.size # checking length of array
                             <DropdownMenu>
                                 {this.stepNames.map((stepName, i) => {
                                     return <DropdownItem
+                                            disabled={(i === this.state.currentPage)? true : null}
                                             style={{cursor: 'pointer'}}
                                             onClick={()=>this.goTo(i)}>{`${i+1}. ${stepName}`}
                                         </DropdownItem>
