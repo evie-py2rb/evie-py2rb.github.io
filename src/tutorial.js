@@ -1,6 +1,6 @@
 import React from 'react';
 import { CodeRendererComponent } from './coderenderer';
-import { Row, Col } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem , Row, Col} from 'reactstrap';
 
 export class TutorialComponent extends React.Component {
 
@@ -13,7 +13,7 @@ export class TutorialComponent extends React.Component {
         } else {
             currentPage -= 1;
         }
-        this.stepNames = ["Interactive Console", "Function definition", "Comments"];
+        this.stepNames = ["Interactive Console", "Function definition", "Comments", 'Arrays'];
         this.pythonCodes = [
 `# Opening an interactive python console
 $ python
@@ -46,6 +46,25 @@ single line comments in python start with a hash - #
 I'm a multi-line comment and
 I'm sure you can figure out what I start and end with
 '''
+`,
+`$ python
+Python 2.7.10 (default, Feb  7 2017, 00:08:15)
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>> evie_cool_peeps = ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish"]
+>>> evie_cool_peeps
+['Evie', 'Jin', 'Yee Yee', 'Madhav', 'Jo', 'Sheng', 'Alyssa', 'Wu Wei', 'Ashish']
+>>> evie_cool_peeps.sort()
+>>> evie_cool_peeps
+['Alyssa', 'Ashish', 'Evie', 'Jin', 'Jo', 'Madhav', 'Sheng', 'Wu Wei', 'Yee Yee']
+# oops forgot TK!!
+>>> evie_cool_peeps.append("TK")
+['Alyssa', 'Ashish', 'Evie', 'Jin', 'Jo', 'Madhav', 'Sheng', 'Wu Wei', 'Yee Yee', 'TK']
+# in python - arrays/ lists can be heterogeneous, right?
+>>> another_array = [1, 2, 'Evie', 6.0, True]
+>>> len(another_array) # checking length of array
+5
 `
 ];
 
@@ -89,6 +108,23 @@ start with a '=begin', write whatever you want
 and close with a '=end'
 ruby will consider everything in between as a comment
 =end
+`,
+`$ irb
+irb(main):001:0* evie_cool_peeps = ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish"]
+=> ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish"]
+irb(main):02:0>
+irb(main):03:0* evie_cool_peeps.sort() # unlike python this won't modify the same array
+=> ["Alyssa", "Ashish", "Evie", "Jin", "Jo", "Madhav", "Sheng", "Wu Wei", "Yee Yee"]
+irb(main):004:0> evie_cool_peeps # notice - the original array is still unmodified!
+=> ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish"]
+# oops forgot TK!!
+irb(main):005:0* evie_cool_peeps.push("TK") # this is how you append in ruby array
+=> ["Evie", "Jin", "Yee Yee", "Madhav", "Jo", "Sheng", "Alyssa", "Wu Wei", "Ashish", "TK"]
+# just like python, ruby arrays can be heterogeneous too!
+irb(main):006:0* another_array = [1, 2, 'Evie', 6.0, True]
+=> [1, 2, "Evie", 6.0, true]
+irb(main):006:0* another_array.size # checking length of array
+=> 5
 `
 ];
         this.equalizeCodes();
@@ -96,6 +132,7 @@ ruby will consider everything in between as a comment
             currentPage: currentPage,
             pythonCode: this.pythonCodes[currentPage],
             rubyCode: this.rubyCodes[currentPage],
+            dropdownOpen: false
         };
     }
 
@@ -125,25 +162,30 @@ ruby will consider everything in between as a comment
     next = () => {
         if (this.state.currentPage < this.pythonCodes.length - 1) {
             const currentPage = this.state.currentPage + 1;
-            this.setState({
-                currentPage: currentPage,
-                pythonCode: this.pythonCodes[currentPage],
-                rubyCode: this.rubyCodes[currentPage],
-            });
-            this.props.history.push(`/tutorial/${currentPage+1}`);
+            this.goTo(currentPage);            
         }
     }
 
     previous = () => {
         if (this.state.currentPage > 0) {
             const currentPage = this.state.currentPage - 1;
-            this.setState({
-                currentPage: currentPage,
-                pythonCode: this.pythonCodes[currentPage],
-                rubyCode: this.rubyCodes[currentPage],
-            });
-            this.props.history.push(`/tutorial/${currentPage+1}`);
+            this.goTo(currentPage);
         }
+    }
+
+    toggle = () => {
+        this.setState(prevState => ({
+            dropdownOpen: !prevState.dropdownOpen
+        }));
+    }
+
+    goTo = (i) => {
+        this.setState({
+            currentPage: i,
+            pythonCode: this.pythonCodes[i],
+            rubyCode: this.rubyCodes[i],
+        });
+        this.props.history.push(`/tutorial/${i+1}`);
     }
 
     render() {
@@ -165,9 +207,21 @@ ruby will consider everything in between as a comment
                         <h3 className="center bold">Ruby  </h3>
                     </Col>
                     <Col xs="12" className="mb-4 pb-2">
-                        <h5 className="center step-name bold">
-                            {`${this.state.currentPage+1}. ${this.stepNames[this.state.currentPage]}`}
-                        </h5>
+                        <div className="center">
+                        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                            <DropdownToggle caret>
+                                {`${this.state.currentPage+1}. ${this.stepNames[this.state.currentPage]}`}
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                {this.stepNames.map((stepName, i) => {
+                                    return <DropdownItem
+                                            style={{cursor: 'pointer'}}
+                                            onClick={()=>this.goTo(i)}>{`${i+1}. ${stepName}`}
+                                        </DropdownItem>
+                                })}
+                            </DropdownMenu>
+                        </Dropdown>
+                        </div>
                     </Col>
                     <Col xs="12" sm="6">
                         <CodeRendererComponent code={this.state.pythonCode} type="py"></CodeRendererComponent>
